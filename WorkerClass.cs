@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.IO;
 
 namespace ICE_02___Media_Player__WAV_files_
 {
@@ -53,6 +54,7 @@ namespace ICE_02___Media_Player__WAV_files_
         public void PlayWavFile()
         {
             var player = new SoundPlayer();
+            string wavFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "WAV Files");
             int wavFileNumber = 0;
 
             while (true)
@@ -67,17 +69,17 @@ namespace ICE_02___Media_Player__WAV_files_
                 {
                     case 1:
                         DisplayMenu(1);
-                        player.SoundLocation = @"C:\Users\mihir\OneDrive\Documents\Rick Astley - Never Gonna Give You Up (Official Music Video).wav";
+                        player.SoundLocation = Path.Combine(wavFolderPath, "Rick Astley - Never Gonna Give You Up (Official Music Video).wav");
                         player.Play();
                         break;
                     case 2:
                         DisplayMenu(2);
-                        player.SoundLocation = @"C:\Users\mihir\OneDrive\Documents\Send this to all your friends.wav";
+                        player.SoundLocation = Path.Combine(wavFolderPath, "Send this to all your friends.wav");
                         player.Play();
                         break;
                     case 3:
                         DisplayMenu(3);
-                        player.SoundLocation = @"C:\Users\mihir\OneDrive\Documents\Send this to your friend and say nothing  #share #viral #meme #subscribe.wav";
+                        player.SoundLocation = Path.Combine(wavFolderPath, "Send this to your friend and say nothing  #share #viral #meme #subscribe.wav");
                         player.Play();
                         break;
                     case 0:
@@ -88,8 +90,11 @@ namespace ICE_02___Media_Player__WAV_files_
                         break;
                 }
 
-                Console.WriteLine("\nPress any key to stop the music.");
-                Console.ReadLine();
+                Console.WriteLine("\nPress the space key to stop.");
+                if (Console.ReadKey().Key == ConsoleKey.Spacebar)
+                {
+                    player.Stop();
+                }
             }
         }
     }   
